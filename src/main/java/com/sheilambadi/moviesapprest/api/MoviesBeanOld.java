@@ -20,12 +20,12 @@ import javax.persistence.TypedQuery;
  * @author sheilambadi
  */
 @Stateless
-public class MoviesBean {
+public class MoviesBeanOld {
 
     @PersistenceContext(unitName = "com.sheilambadi_MoviesAppRest_war_1.0-SNAPSHOTPU")
     private EntityManager em;
 
-    public MoviesBean() {
+    public MoviesBeanOld() {
     }
     
     // get all movies

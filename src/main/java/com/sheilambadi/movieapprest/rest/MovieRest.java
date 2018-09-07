@@ -6,9 +6,9 @@
 package com.sheilambadi.movieapprest.rest;
 
 import com.google.gson.Gson;
-import com.sheilambadi.moviesapprest.api.MoviesBean;
+import com.sheilambadi.moviesapprest.api.MoviesBeanOld;
 import com.sheilambadi.moviesapprest.entities.Movie;
-import com.sheilambadi.moviesapprest.services.MovieService;
+import com.sheilambadi.moviesapprest.bean.MovieBean;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -31,7 +31,7 @@ import javax.ws.rs.core.MediaType;
 public class MovieRest {
     
     @EJB
-    MovieService movieService; 
+    MovieBean movieService; 
  
     @GET
     @Path("/list_movies")

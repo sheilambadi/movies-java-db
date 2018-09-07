@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.sheilambadi.moviesapprest.services;
+package com.sheilambadi.moviesapprest.bean;
 
 import com.sheilambadi.moviesapprest.entities.Movie;
 import java.util.List;
@@ -22,7 +22,7 @@ import javax.persistence.TypedQuery;
  */
 
 @Stateless
-public class MovieService {
+public class MovieBean {
     @PersistenceContext
     EntityManager em;
     
