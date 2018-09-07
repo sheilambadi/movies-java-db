@@ -7,20 +7,24 @@ package com.sheilambadi.moviesapprest.services;
 
 import com.sheilambadi.moviesapprest.entities.Movie;
 import java.util.List;
+import javax.ejb.Stateful;
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 /**
- *
+ *;
  * @author sheilambadi
  */
 
+@Stateless
 public class MovieService {
-    // @PersistenceContext(unitName = "com.sheilambadi_MoviesAppRest_war_1.0-SNAPSHOTPU")
-    EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("com.sheilambadi_MoviesAppRest_war_1.0-SNAPSHOTPU");
-    EntityManager em = entityManagerFactory.createEntityManager();
+    @PersistenceContext
+    EntityManager em;
     
     // get all movies
     public List<Movie> getMovies(){
@@ -28,9 +32,24 @@ public class MovieService {
         List<Movie> movies =  typedQuery.getResultList();
         return movies;
     }
-    
+   
+    // get movie by id
     public Movie getMovieById(int id){
         Movie movie = em.find(Movie.class, id);
+        return movie;
+    }
+    
+    // save movie to db
+    public Movie createMovie(Movie movie){
+        em.persist(movie);
+        em.flush();
+        return movie;
+    }
+    
+    // delete movie from DB
+    public Movie deleteMovie(int id){
+        Movie movie = em.find(Movie.class, id);
+        em.remove(movie);
         return movie;
     }
 }
