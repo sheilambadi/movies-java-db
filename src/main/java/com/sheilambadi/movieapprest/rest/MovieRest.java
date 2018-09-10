@@ -1,12 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.sheilambadi.movieapprest.rest;
 
 import com.google.gson.Gson;
-import com.sheilambadi.moviesapprest.api.MoviesBeanOld;
 import com.sheilambadi.moviesapprest.entities.Movie;
 import com.sheilambadi.moviesapprest.bean.MovieBean;
 import java.util.List;
@@ -28,6 +22,8 @@ import javax.ws.rs.core.MediaType;
 
 @Path("/movie")
 @Stateless
+@Consumes(MediaType.APPLICATION_JSON)
+@Produces(MediaType.APPLICATION_JSON)
 public class MovieRest {
     
     @EJB
@@ -35,7 +31,6 @@ public class MovieRest {
  
     @GET
     @Path("/list_movies")
-    @Produces(MediaType.APPLICATION_JSON)
     public List<Movie> findMovie(){
        List<Movie> movies = movieService.getMovies();
        return movies;
@@ -43,7 +38,6 @@ public class MovieRest {
   
     @GET
     @Path("/movie_id/{id}")
-    @Produces(MediaType.APPLICATION_JSON)
     public Movie findAllMovies(@PathParam("id") int id){
        Movie movies = movieService.getMovieById(id);
        return movies;
@@ -51,8 +45,6 @@ public class MovieRest {
     
     @POST
     @Path("/create_movie")
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
     public Movie saveMovie(Movie movie){
         Gson gson = new Gson();
         System.out.println("sent object: " + gson.toJson(movie));
@@ -62,7 +54,6 @@ public class MovieRest {
     
     @DELETE
     @Path("/delete_movie/{id}")
-    @Produces(MediaType.APPLICATION_JSON)
     public Movie deleteMovie(@PathParam("id") int id){
        Movie movies = movieService.deleteMovie(id);
        return movies;
