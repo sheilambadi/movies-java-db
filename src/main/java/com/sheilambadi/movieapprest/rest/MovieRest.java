@@ -10,6 +10,7 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -57,5 +58,12 @@ public class MovieRest {
     public Movie deleteMovie(@PathParam("id") int id){
        Movie movies = movieService.deleteMovie(id);
        return movies;
+    }
+    
+    @PUT
+    @Path("/update_movie/{id}")
+    public Movie updateMovie(@PathParam("id") int id, Movie movieUpdate){
+        Movie movie = movieService.updateMovie(id, movieUpdate);
+        return movie;
     }
 }

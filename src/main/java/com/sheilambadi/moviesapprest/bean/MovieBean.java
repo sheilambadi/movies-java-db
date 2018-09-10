@@ -44,5 +44,15 @@ public class MovieBean {
         return movie;
     }
     
-    
+    // update movie
+    public Movie updateMovie(int id, Movie movieUpdate){
+        Movie movie = em.find(Movie.class, id);
+        movie.setMovieId(id);
+        movie.setMovieName(movieUpdate.getMovieName());
+        movie.setMovieSynopsis(movieUpdate.getMovieSynopsis());
+        movie.setMovieYear(movieUpdate.getMovieYear());
+        em.persist(movie);
+        em.flush();
+        return movie;
+    }
 }
