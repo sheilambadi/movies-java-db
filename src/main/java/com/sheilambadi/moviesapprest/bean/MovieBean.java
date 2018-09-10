@@ -51,8 +51,11 @@ public class MovieBean {
         movie.setMovieName(movieUpdate.getMovieName());
         movie.setMovieSynopsis(movieUpdate.getMovieSynopsis());
         movie.setMovieYear(movieUpdate.getMovieYear());
-        em.persist(movie);
-        em.flush();
+        
+        if(movie != null){
+             em.persist(movie);
+             em.flush();
+        }
         return movie;
     }
 }

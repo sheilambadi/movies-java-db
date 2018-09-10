@@ -1,4 +1,4 @@
-app.controller("myController", function($scope, $http){
+app.controller("myController", function($scope, $http, notify){
    
    $scope.sendMovieData = function(){
        var movieData = {
@@ -6,7 +6,16 @@ app.controller("myController", function($scope, $http){
            "movieYear":$scope.nameMovieYear,
            "movieSynopsis":$scope.nameMovieSynopsis
        };
-       $http.post("api/movie/create_movie", movieData);
+       
+       $http({
+           url: "api/movie/create_movie",
+           method: "POST",
+           data: movieData
+       }).then(function(response){
+          notify(response.data.movieName + ' Added!');
+       }, function(response){
+           notify('All fields are required!!!');
+       });
    };
    
    $http({
