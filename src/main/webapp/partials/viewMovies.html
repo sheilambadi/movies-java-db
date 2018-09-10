@@ -4,11 +4,15 @@
             <th>Movie Name</th>
             <th>Movie Year</th>
             <th>Movie Synopsis</th>
+            <th>Update Movie</th>
+            <th>Delete Movie</th>
          </tr>
     </thead>
     <tr ng-repeat="x in data">
         <td>{{x.movieName}}</td>
         <td>{{x.movieYear}}</td>
         <td>{{x.movieSynopsis}}</td>
+        <td><button class="btn btn-primary">Update</button></td>
+        <td><button class="btn btn-danger">Delete</button></td>
     </tr>
 </table>
