@@ -43,4 +43,6 @@ public class MovieBean {
         em.remove(movie);
         return movie;
     }
+    
+    
 }
