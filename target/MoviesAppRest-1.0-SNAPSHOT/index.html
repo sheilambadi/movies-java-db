@@ -9,7 +9,26 @@
     </head>
     <body ng-app="myApp">
         
-        <div ng-controller="myController">
+        <div ng-controller="myController" class="container">
+            <h1>Input Movie</h1>
+            <div class="form-group">
+                <label for="movieName">Movie Name</label>
+                <input type="text" class="form-control" id="movieName" placeholder="Movie Name">
+             </div>
+            
+            <div class="form-group">
+                <label for="movieYear">Movie Year</label>
+                <input type="number" class="form-control" id="movieYear" placeholder="Movie Year">
+             </div>
+            
+            <div class="form-group">
+                <label for="movieSynopsis">Movie Synopsis</label>
+                <textarea class="form-control" id="movieSynopsis" placeholder="Movie Synopsis"></textarea>
+             </div>
+            
+            <button class="btn btn-primary" type="submit">Submit</button>
+            
+            <h1>Movies</h1>
             <table class="table table-bordered table-hover">
                 <thead class="thead-dark">
                     <tr>
