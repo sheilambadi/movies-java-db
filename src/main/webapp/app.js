@@ -30,7 +30,33 @@ app.config(function($stateProvider, $urlRouterProvider){
     }).state("viewMovies",{
         url:"/viewMovies",
         templateUrl:"./partials/viewMovies.html",
-        controller:"myController"
+        controller: function($scope, $http){
+            $http({
+                url: "api/movie/list_movies",
+                method: "GET"
+                }).then(function(response){
+                    $scope.data=response.data;
+                    console.log("Data fetched from db");
+                }, function(response){
+                    console.log("Error fetching from db");
+                });
+                
+            $scope.deleteMovie = function(movieId){
+                var movieData = {
+                    id:movieId
+                };
+                 $http({
+                     url: "api/movie/delete_movie/" + movieData.id,
+                     method:"DELETE"
+                 }).then(function(response){
+                     // notify(response.data.movieName + ' Deleted!');
+                     // $scope.markDeleted(movieData.id);
+                     console.log(response.data.movieName + " Deleted successfully");
+                 }, function(response){
+                     console.log(response.data.movieName + " Not Deleted");
+                 });
+             };
+        }
     }).state("updateMovie",{
         url:"/updateMovie/:idMovie",
         templateUrl:"./partials/updateMovie.html",
