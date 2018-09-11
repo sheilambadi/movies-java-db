@@ -22,12 +22,17 @@ app.config(function($stateProvider, $urlRouterProvider){
                     console.log(response.data.movieName + ' Added!');
                      notify({
                         message:response.data.movieName + " Added",
-                        duration:2000
+                        duration:2000,
+                        classes: 'alert-success'
                     });
                     $state.go("viewMovies");
                 }, function(response){
                     console.log("Failure");
-                    notify('All fields are required!!!');
+                    notify({
+                        message: 'All fields are required!!!',
+                        duration:3000,
+                        classes: 'alert-danger'
+                    });
                 });
             };
         }
@@ -40,7 +45,7 @@ app.config(function($stateProvider, $urlRouterProvider){
                 method: "GET"
                 }).then(function(response){
                     $scope.data=response.data;
-                    console.log("Data fetched from db");
+                    console.log(response.status);
                 }, function(response){
                     console.log("Error fetching from db");
                 });
@@ -57,15 +62,16 @@ app.config(function($stateProvider, $urlRouterProvider){
                      console.log(response.data.movieName + " Deleted successfully");
                      notify({
                         message:response.data.movieName + " Deleted",
-                        duration:2000
+                        duration:2000,
+                        classes: 'alert-success'
                     });
                     $state.reload();
-                     // $state.go("viewMovies");
                  }, function(response){
-                     console.log("Error on delete Movie not Deleted");
+                     console.log(response);
                      notify({
-                         message: "Error on delete Movie not Deleted",
-                         duration:2000
+                         message: "Error deleting movie",
+                         duration:3000,
+                         classes: 'alert-danger'
                      });
                  });
              };
@@ -105,12 +111,17 @@ app.config(function($stateProvider, $urlRouterProvider){
                     console.log(response.data.movieName + " Updated");
                     notify({
                         message:response.data.movieName + " Updated",
-                        duration:2000
+                        duration:2000,
+                        classes: 'alert-success'
                     });
                     $state.go("viewMovies");
                 }, function(response){
                     console.log("Error updating movie");
-                    notify("Error updating movie");
+                    notify({
+                        message: "Error updating movie",
+                        duration:3000,
+                        classes: 'alert-danger'
+                    });
                 });
                         
             };
