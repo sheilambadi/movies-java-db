@@ -12,7 +12,10 @@
         <td>{{x.movieName}}</td>
         <td>{{x.movieYear}}</td>
         <td>{{x.movieSynopsis}}</td>
-        <td><button class="btn btn-primary">Update</button></td>
+        <td><a ui-sref="updateMovie({idMovie:x.movieId})" class="btn btn-primary">
+            <span>Update</span>
+            </a>
+        </td>
         <td><button class="btn btn-danger" ng-click="deleteMovie(x.movieId);">Delete</button></td>
     </tr>
 </table>

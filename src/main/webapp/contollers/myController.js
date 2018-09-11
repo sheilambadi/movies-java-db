@@ -1,4 +1,4 @@
-app.controller("myController", function($scope, $http, notify){
+app.controller("myController", function($stateParams, $scope, $http){
    
    $scope.deleteMovie = function(movieId){
        var movieData = {
@@ -8,10 +8,10 @@ app.controller("myController", function($scope, $http, notify){
             url: "api/movie/delete_movie/" + movieData.id,
             method:"DELETE"
         }).then(function(response){
-            notify(response.data.movieName + ' Deleted!');
+            // notify(response.data.movieName + ' Deleted!');
             $scope.markDeleted(movieData.id);
         }, function(response){
-            notify('Error');
+            // notify('Error');
         });
     };
     
@@ -36,9 +36,11 @@ app.controller("myController", function($scope, $http, notify){
            method: "POST",
            data: movieData
        }).then(function(response){
-          notify(response.data.movieName + ' Added!');
+           console.log("Success");
+          // notify(response.data.movieName + ' Added!');
        }, function(response){
-           notify('All fields are required!!!');
+           console.log("Failure");
+           // notify('All fields are required!!!');
        });
    };
   
@@ -48,4 +50,4 @@ app.controller("myController", function($scope, $http, notify){
         }).then(function(response){
             $scope.data=response.data;
         });
-    }); 
+}); 

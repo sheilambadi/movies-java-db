@@ -1,0 +1,16 @@
+<div class="form-group">
+    <label for="movieName">Movie Name</label>
+    <input type="text" ng-model="movieData.movieName" required class="form-control" id="movieNameUpdate" placeholder="Movie Name">
+</div>
+            
+<div class="form-group">
+    <label for="movieYear">Movies Year</label>
+    <input type="number" ng-model="movieData.movieYear" required class="form-control" id="movieYearUpdate" placeholder="Movie Year">
+</div>
+            
+<div class="form-group">
+    <label for="movieSynopsis">Movie Synopsis</label>
+    <textarea class="form-control" required ng-model="movieData.movieSynopsis" id="movieSynopsisUpdate" placeholder="Movie Synopsis"></textarea>
+</div>
+            
+ <button class="btn btn-primary" ng-click="updateMovieDate()">Update Movie</button>
