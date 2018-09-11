@@ -34,7 +34,7 @@ app.config(function($stateProvider, $urlRouterProvider){
     }).state("viewMovies",{
         url:"/viewMovies",
         templateUrl:"./partials/viewMovies.html",
-        controller: function($scope, $http, notify){
+        controller: function($scope, $state, $http, notify){
             $http({
                 url: "api/movie/list_movies",
                 method: "GET"
@@ -55,10 +55,18 @@ app.config(function($stateProvider, $urlRouterProvider){
                  }).then(function(response){
                      // $scope.markDeleted(movieData.id);
                      console.log(response.data.movieName + " Deleted successfully");
-                     notify(response.data.movieName + ' Deleted!');
+                     notify({
+                        message:response.data.movieName + " Deleted",
+                        duration:2000
+                    });
+                    $state.reload();
+                     // $state.go("viewMovies");
                  }, function(response){
-                     console.log(response.data.movieName + " Not Deleted");
-                     notify(response.data.movieName + " Not Deleted");
+                     console.log("Error on delete Movie not Deleted");
+                     notify({
+                         message: "Error on delete Movie not Deleted",
+                         duration:2000
+                     });
                  });
              };
         }
