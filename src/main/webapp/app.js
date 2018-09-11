@@ -6,7 +6,7 @@ app.config(function($stateProvider, $urlRouterProvider){
     $stateProvider.state("addMovie", {
         url:"/addMovie",
         templateUrl:"./partials/addMovie.html",
-        controller: function($scope, $http, notify){
+        controller: function($scope,$state, $http, notify){
             $scope.sendMovieData = function(){
                 var movieData = {
                     "movieName":$scope.nameMovie,
@@ -20,7 +20,11 @@ app.config(function($stateProvider, $urlRouterProvider){
                     data: movieData
                 }).then(function(response){
                     console.log(response.data.movieName + ' Added!');
-                    notify(response.data.movieName + ' Added!');
+                     notify({
+                        message:response.data.movieName + " Added",
+                        duration:2000
+                    });
+                    $state.go("viewMovies");
                 }, function(response){
                     console.log("Failure");
                     notify('All fields are required!!!');
@@ -91,7 +95,10 @@ app.config(function($stateProvider, $urlRouterProvider){
                     data: newMovieData
                 }).then(function(response){
                     console.log(response.data.movieName + " Updated");
-                    notify(response.data.movieName + " Updated");
+                    notify({
+                        message:response.data.movieName + " Updated",
+                        duration:2000
+                    });
                     $state.go("viewMovies");
                 }, function(response){
                     console.log("Error updating movie");
