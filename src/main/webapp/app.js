@@ -26,10 +26,29 @@ app.config(function($stateProvider, $urlRouterProvider){
                 method:"GET"
             }).then(function(response){
                 $scope.movieData = response.data;
-                console.log(response.data.movieName);
+                console.log(response.data);
+            }, function(response){
+                console.log("Error fetching movie data");
             });
             
-            
+            $scope.updateMovieDate = function(){
+                var newMovieData = {
+                    "movieName": $scope.movieData.movieName,
+                    "movieYear": $scope.movieData.movieYear,
+                    "movieSynopsis": $scope.movieData.movieSynopsis
+                };
+                
+                $http({
+                    url: "api/movie/update_movie/" + movie.id,
+                    method: "PUT",
+                    data: newMovieData
+                }).then(function(response){
+                    console.log(response.data.movieName + " Updated");
+                }, function(response){
+                    console.log("Error fetching data from db");
+                });
+                        
+            };
         }
     });
 });
