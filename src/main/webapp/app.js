@@ -61,7 +61,7 @@ app.config(function($stateProvider, $urlRouterProvider){
     }).state("updateMovie",{
         url:"/updateMovie/:idMovie",
         templateUrl:"./partials/updateMovie.html",
-        controller:function($stateParams, $scope, $http, notify){
+        controller:function($stateParams, $state, $scope, $http, notify){
             
             // variables
             var movie = {
@@ -92,6 +92,7 @@ app.config(function($stateProvider, $urlRouterProvider){
                 }).then(function(response){
                     console.log(response.data.movieName + " Updated");
                     notify(response.data.movieName + " Updated");
+                    $state.go("viewMovies");
                 }, function(response){
                     console.log("Error updating movie");
                     notify("Error updating movie");
