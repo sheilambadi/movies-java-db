@@ -1,4 +1,4 @@
-var app = angular.module("myApp", ["ui.router"]);
+var app = angular.module("myApp", ["ui.router", "cgNotify"]);
 
 app.config(function($stateProvider, $urlRouterProvider){
     $urlRouterProvider.otherwise("/addMovie");
@@ -6,7 +6,7 @@ app.config(function($stateProvider, $urlRouterProvider){
     $stateProvider.state("addMovie", {
         url:"/addMovie",
         templateUrl:"./partials/addMovie.html",
-        controller: function($scope, $http){
+        controller: function($scope, $http, notify){
             $scope.sendMovieData = function(){
                 var movieData = {
                     "movieName":$scope.nameMovie,
@@ -20,17 +20,17 @@ app.config(function($stateProvider, $urlRouterProvider){
                     data: movieData
                 }).then(function(response){
                     console.log(response.data.movieName + ' Added!');
-                   // notify(response.data.movieName + ' Added!');
+                    notify(response.data.movieName + ' Added!');
                 }, function(response){
                     console.log("Failure");
-                    // notify('All fields are required!!!');
+                    notify('All fields are required!!!');
                 });
             };
         }
     }).state("viewMovies",{
         url:"/viewMovies",
         templateUrl:"./partials/viewMovies.html",
-        controller: function($scope, $http){
+        controller: function($scope, $http, notify){
             $http({
                 url: "api/movie/list_movies",
                 method: "GET"
@@ -49,18 +49,19 @@ app.config(function($stateProvider, $urlRouterProvider){
                      url: "api/movie/delete_movie/" + movieData.id,
                      method:"DELETE"
                  }).then(function(response){
-                     // notify(response.data.movieName + ' Deleted!');
                      // $scope.markDeleted(movieData.id);
                      console.log(response.data.movieName + " Deleted successfully");
+                     notify(response.data.movieName + ' Deleted!');
                  }, function(response){
                      console.log(response.data.movieName + " Not Deleted");
+                     notify(response.data.movieName + " Not Deleted");
                  });
              };
         }
     }).state("updateMovie",{
         url:"/updateMovie/:idMovie",
         templateUrl:"./partials/updateMovie.html",
-        controller:function($stateParams, $scope, $http){
+        controller:function($stateParams, $scope, $http, notify){
             
             // variables
             var movie = {
@@ -90,8 +91,10 @@ app.config(function($stateProvider, $urlRouterProvider){
                     data: newMovieData
                 }).then(function(response){
                     console.log(response.data.movieName + " Updated");
+                    notify(response.data.movieName + " Updated");
                 }, function(response){
-                    console.log("Error fetching data from db");
+                    console.log("Error updating movie");
+                    notify("Error updating movie");
                 });
                         
             };
