@@ -23,26 +23,6 @@ app.controller("myController", function($stateParams, $scope, $http){
         });
     };
 
-
-   $scope.sendMovieData = function(){
-       var movieData = {
-           "movieName":$scope.nameMovie,
-           "movieYear":$scope.nameMovieYear,
-           "movieSynopsis":$scope.nameMovieSynopsis
-       };
-       
-       $http({
-           url: "api/movie/create_movie",
-           method: "POST",
-           data: movieData
-       }).then(function(response){
-           console.log("Success");
-          // notify(response.data.movieName + ' Added!');
-       }, function(response){
-           console.log("Failure");
-           // notify('All fields are required!!!');
-       });
-   };
   
    $http({
             url: "api/movie/list_movies",

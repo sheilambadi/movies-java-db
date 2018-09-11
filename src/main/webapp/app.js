@@ -6,7 +6,27 @@ app.config(function($stateProvider, $urlRouterProvider){
     $stateProvider.state("addMovie", {
         url:"/addMovie",
         templateUrl:"./partials/addMovie.html",
-        controller:"myController"
+        controller: function($scope, $http){
+            $scope.sendMovieData = function(){
+                var movieData = {
+                    "movieName":$scope.nameMovie,
+                    "movieYear":$scope.nameMovieYear,
+                    "movieSynopsis":$scope.nameMovieSynopsis
+                };
+
+                $http({
+                    url: "api/movie/create_movie",
+                    method: "POST",
+                    data: movieData
+                }).then(function(response){
+                    console.log(response.data.movieName + ' Added!');
+                   // notify(response.data.movieName + ' Added!');
+                }, function(response){
+                    console.log("Failure");
+                    // notify('All fields are required!!!');
+                });
+            };
+        }
     }).state("viewMovies",{
         url:"/viewMovies",
         templateUrl:"./partials/viewMovies.html",
