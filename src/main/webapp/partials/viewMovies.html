@@ -8,11 +8,11 @@
             <th>Delete Movie</th>
          </tr>
     </thead>
-    <tr ng-repeat="x in data">
+    <tr ng-repeat="x in data" ng-hide="s.deleted">
         <td>{{x.movieName}}</td>
         <td>{{x.movieYear}}</td>
         <td>{{x.movieSynopsis}}</td>
         <td><button class="btn btn-primary">Update</button></td>
-        <td><button class="btn btn-danger">Delete</button></td>
+        <td><button class="btn btn-danger" ng-click="deleteMovie(x.movieId);">Delete</button></td>
     </tr>
 </table>
